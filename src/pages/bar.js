@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Plot from "react-plotly.js";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useEstacao } from "../context/EstacaoContext";
 
 export const typePlot = () => {
-  return "scatter";
+  return "bar";
 };
 
-function BarFetch() {
+function Example() {
   const { estacaoId, setEstacao } = useEstacao();
-
-  const { idEstacao } = useParams();
-  if(idEstacao) {
-    const value = +idEstacao.slice(1,4)
-
-    setEstacao(value)
-  }
-
   const { isLoading, error, data, isFetching } = useQuery(
     ["data", estacaoId],
     () => {
@@ -45,7 +37,7 @@ function BarFetch() {
           {"An error has occurred: " + error.message}
         </p>
         <div style={{ textAlign: "center" }}>
-          <Link to={`/scatter/A${estacaoId + 1}`}>
+          <Link to={`/bar/A${estacaoId + 1}`}>
             <button onClick={() => setEstacao((estacao) => estacao + 1)}>
               Next
             </button>
@@ -77,18 +69,18 @@ function BarFetch() {
         />
       </section>
       <div style={{ textAlign: "center" }}>
-        <Link to={`/scatter/A${estacaoId - 1}`}>
+        <Link to={`/bar/A${estacaoId - 1}`}>
           <button onClick={() => setEstacao((estacao) => estacao - 1)}>
             Prev
           </button>
         </Link>
-        <Link to={`/scatter/A${estacaoId + 1}`}>
+        <Link to={`/bar/A${estacaoId + 1}`}>
           <button onClick={() => setEstacao((estacao) => estacao + 1)}>
             Next
           </button>
         </Link>
-        <Link to={`/bar/A${estacaoId}`}>
-          <button>Bar</button>
+        <Link to={`/scatter/A${estacaoId}`}>
+          <button>Scatter</button>
         </Link>
       </div>
       {isFetching && <p style={{ textAlign: "center" }}>Atualizando dados.</p>}
@@ -96,6 +88,6 @@ function BarFetch() {
   );
 }
 
-export function Home() {
-  return <BarFetch />;
+export function Bar() {
+  return <Example />;
 }
