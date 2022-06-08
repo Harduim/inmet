@@ -62,14 +62,21 @@ const PageFrame = (props) => {
           itemId='grp-2'
           isActive={false}
         >
-          Estações E Dados Meteorológicos
+          <a href='/estacoes/map'>Map</a>
         </NavItem>
         <NavItem
           groupId='grp-2'
           itemId='grp-2'
           isActive={false}
         >
-          Análise Da Situação Atual
+          <a href='#/estacoes/bar'>Bar</a>
+        </NavItem>
+        <NavItem
+          groupId='grp-2'
+          itemId='grp-2'
+          isActive={false}
+        >
+          <a href='/estacoes/line'>Line</a>
         </NavItem>
         <NavItem
           groupId='grp-2'

@@ -5,16 +5,14 @@ import { useQuery } from 'react-query'
 const EstacaoContext = createContext(true)
 
 export const EstacaoProvider = ({ children }) => {
+  const [estacaoId, setEstacaoId] = useState('A301')
   const [estacao, setEstacao] = useState()
-  const [estacoes, setEstacoes] = useState()
 
-  const estacoesRequest = useQuery(
+  const getEstacaoById = eid => estacoes.find(e => e.CD_ESTACAO == eid)
+
+  const estacoesQuery = useQuery(
     ['estacoes'],
-    async () => {
-      const resp = await api.get('/T')
-      setEstacao(resp.data[0])
-      return resp.data
-    },
+    () => api.get('/T').then(r => r.data),
     {
       onError: (error) => {
         console.log(error)
@@ -24,17 +22,17 @@ export const EstacaoProvider = ({ children }) => {
       staleTime: 1000 * 3600
     }
   )
-  const estacoesIsLoading = estacoesRequest.isLoading
 
-  useEffect(
-    () => {
-      if (!estacoesRequest.data) return
-      setEstacoes(estacoesRequest.data)
-    },
-    [estacoesRequest.data]
-  )
+  const estacoesIsLoading = estacoesQuery.isLoading
+  const estacoes = estacoesQuery.data
 
-  const provides = { estacao, estacoes, estacoesIsLoading }
+  const provides = {
+    estacao,
+    estacoes,
+    estacoesIsLoading,
+    getEstacaoById,
+    estacaoId,
+  }
 
   return <EstacaoContext.Provider value={provides}>{children}</EstacaoContext.Provider>
 };

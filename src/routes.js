@@ -6,10 +6,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/' component={Home} />
-        <Route path='/estacoes/map' component={MapPage} />
-        <Route path='/estacoes/bar' component={BarPage} />
-        <Route path='/estacoes/line' component={LinePage} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/estacoes/map' component={MapPage} />
+        <Route exact path='/estacoes/map/:cd_estacao' component={MapPage} />
+        <Route exact path='/estacoes/bar' component={BarPage} />
+        <Route exact path='/estacoes/line' component={LinePage} />
       </Switch>
     </BrowserRouter>
   )
