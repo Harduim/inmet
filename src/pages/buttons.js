@@ -17,6 +17,12 @@ export function HomeButton() {
       <button type="button" onClick={() => navigate("/animation")}>
         Go Animation
       </button>
+      <button type="button" onClick={() => navigate("/animationFetch")}>
+        Go Animation Fetch
+      </button>
+      <button type="button" onClick={() => navigate("/pageTest")}>
+        Go Page Test
+      </button>
     </section>
   );
 }

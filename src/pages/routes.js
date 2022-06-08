@@ -2,8 +2,10 @@ import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 
 import { Bar } from './bar';
 import { Home } from './home';
-import { HomeButton } from './pageTeste';
+import { HomeButton } from './buttons';
 import { AnimationPlot } from "./animationPlot";
+import { AnimationFetch } from "./animationFetch";
+import { Test } from "./pageTest";
 
 export const MyRoutes = () => {
 
@@ -11,10 +13,11 @@ export const MyRoutes = () => {
     <BrowserRouter>
     <HomeButton />
       <Routes>
-        <Route path={`teste/`} element={<HomeButton />}/>
-        <Route path={`animation/`} element={<AnimationPlot />}/>
-        <Route path={`scatter/:idEstacao`} element={<Home />}/>
-        <Route path={`bar/:id`} element={<Bar />}/>
+        <Route path={`/pageTest/`} element={<Test />}/>
+        <Route path={`/animation/`} element={<AnimationPlot />}/>
+        <Route path={`/animationFetch/`} element={<AnimationFetch />}/>
+        <Route path={`/scatter/:idEstacao`} element={<Home />}/>
+        <Route path={`/bar/:id`} element={<Bar />}/>
       </Routes>
     </BrowserRouter>
     // <BrowserRouter>

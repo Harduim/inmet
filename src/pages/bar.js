@@ -10,6 +10,8 @@ export const typePlot = () => {
 };
 
 function Example() {
+
+  let animal = 1
   const { estacaoId, setEstacao } = useEstacao();
   const { isLoading, error, data, isFetching } = useQuery(
     ["data", estacaoId],
@@ -28,7 +30,7 @@ function Example() {
     }
   );
 
-  if (isLoading) return "Loading...";
+  if(isLoading) return "Loading..."
 
   if (error)
     return (
@@ -62,6 +64,16 @@ function Example() {
               marker: { color: "red" },
             },
           ]}
+          layout={{
+            transition: {
+              duration: 2000,
+              easing: "cubic-in-out",
+            },
+            yaxis: {
+              autorange: false,
+              range: [25, 40],
+            },
+          }}
           style={{
             width: "100%",
             height: "100%",

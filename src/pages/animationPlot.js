@@ -8,6 +8,24 @@ export const AnimationPlot = () => {
   const [frame, setFrame] = useState({});
   const [revision, setRevision] = useState(0);
 
+  const BarChart = () => {
+    return (
+      <div style={{ display: "flex" }}>
+        <Plot
+          data={data}
+          layout={layout}
+          frame={frame}
+          config={config}
+          onInitialized={(figure) => onInitialized(figure)}
+          onTransitioning={(figure) => onTransitioning(figure)}
+          onAfterPlot={(figure) => onAfterPlot(figure)}
+          onRelayout={(figure) => onRelayout(figure)}
+          //revision={this.props.revision}
+        />
+      </div>
+    );
+  };
+
   const propData = [
     {
       x: ["giraffes", "orangutans", "monkeys"],
@@ -33,6 +51,7 @@ export const AnimationPlot = () => {
       }),
     };
   });
+
   const initializedata = () => {
     // set the initial value as zero in order to create animation
 
@@ -77,18 +96,20 @@ export const AnimationPlot = () => {
     const newlayout = {
       ...layout,
       transition: {
-        duration: 1000,
+        duration: 5000,
         easing: "cubic-in",
       },
       title: "updated",
     };
     const newframe = {
-      duration: 1000,
+      duration: 2000,
     };
 
-    console.log(newlayout)
+    //console.log(newlayout)
 
     setData(newData);
+    //setLayout(newlayout);
+    //setFrame(newframe);
     setRevision(revision + 1);
   };
 
@@ -131,26 +152,30 @@ export const AnimationPlot = () => {
   };
   const onupdate = () => {
     if (data.length > 0) {
+      console.log("teste onupdate");
       return;
     }
     console.log("onupdate");
   };
 
   return (
-    <section style={{ textAlign: "center" }}>
+    <section>
       <button onClick={onClick}>Animate</button>
-      <Plot
-        data={data}
-        layout={layout}
-        frame={frame}
-        onInitialized={onInitialized}
-        onupdate={onupdate}
-        onClick={onClick}
-        onTransitioning={onTransitioning}
-        onAfterPlot={onAfterPlot}
-        onRelayout={onRelayout}
-        revision={revision}
-      />
+      <div style={{ display: "flex" }}>
+        <Plot
+          data={data}
+          layout={layout}
+          frame={frame}
+          config={config}
+          onupdate={onupdate}
+          onClick={onClick}
+          onInitialized={onInitialized}
+          onTransitioning={onTransitioning}
+          onAfterPlot={onAfterPlot}
+          onRelayout={onRelayout}
+          revision={revision}
+        />
+        </div>
     </section>
   );
 };
