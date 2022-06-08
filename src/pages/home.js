@@ -1,50 +1,50 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import Plot from "react-plotly.js";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from 'react'
+import { useQuery } from 'react-query'
+import Plot from 'react-plotly.js'
+import { Link, useParams } from 'react-router-dom'
 
-import { useEstacao } from "../context/EstacaoContext";
+import { useEstacao } from '../context/EstacaoContext'
 
 export const typePlot = () => {
-  return "scatter";
-};
+  return 'scatter'
+}
 
-function BarFetch() {
-  const { estacaoId, setEstacao } = useEstacao();
+function BarFetch () {
+  const { estacaoId, setEstacao } = useEstacao()
 
-  const { idEstacao } = useParams();
-  if(idEstacao) {
-    const value = +idEstacao.slice(1,4)
+  const { idEstacao } = useParams()
+  if (idEstacao) {
+    const value = +idEstacao.slice(1, 4)
 
     setEstacao(value)
   }
 
   const { isLoading, error, data, isFetching } = useQuery(
-    ["data", estacaoId],
+    ['data', estacaoId],
     () => {
       return fetch(
         `https://apitempo.inmet.gov.br/estacao/diaria/2019-10-01/2019-10-31/A${estacaoId}`
-      ).then((res) => res.json());
+      ).then((res) => res.json())
     },
     {
       onError: (error) => {
-        console.log(error);
+        console.log(error)
       },
       refetchOnWindowFocus: false,
       retry: false,
-      staleTime: 1000 * 50,
+      staleTime: 1000 * 50
     }
-  );
+  )
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return 'Loading...'
 
-  if (error)
+  if (error) {
     return (
       <section>
-        <p style={{ textAlign: "center", marginTop: "20px" }}>
-          {"An error has occurred: " + error.message}
+        <p style={{ textAlign: 'center', marginTop: '20px' }}>
+          {'An error has occurred: ' + error.message}
         </p>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <Link to={`/scatter/A${estacaoId + 1}`}>
             <button onClick={() => setEstacao((estacao) => estacao + 1)}>
               Next
@@ -52,31 +52,33 @@ function BarFetch() {
           </Link>
         </div>
       </section>
-    );
+    )
+  }
 
   return (
     <div>
       <section>
         <p
-          style={{ textAlign: "center", marginTop: "20px" }}
-        >{`${data[0].DC_NOME} - ${data[0].CD_ESTACAO}`}</p>
+          style={{ textAlign: 'center', marginTop: '20px' }}
+        >{`${data[0].DC_NOME} - ${data[0].CD_ESTACAO}`}
+        </p>
         <Plot
           data={[
             {
               x: data.map((el) => el.DT_MEDICAO),
               y: data.map((el) => el.TEMP_MAX),
               type: typePlot(),
-              mode: "lines+markers",
-              marker: { color: "red" },
-            },
+              mode: 'lines+markers',
+              marker: { color: 'red' }
+            }
           ]}
           style={{
-            width: "100%",
-            height: "100%",
+            width: '100%',
+            height: '100%'
           }}
         />
       </section>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: 'center' }}>
         <Link to={`/scatter/A${estacaoId - 1}`}>
           <button onClick={() => setEstacao((estacao) => estacao - 1)}>
             Prev
@@ -91,11 +93,11 @@ function BarFetch() {
           <button>Bar</button>
         </Link>
       </div>
-      {isFetching && <p style={{ textAlign: "center" }}>Atualizando dados.</p>}
+      {isFetching && <p style={{ textAlign: 'center' }}>Atualizando dados.</p>}
     </div>
-  );
+  )
 }
 
-export function Home() {
-  return <BarFetch />;
+export function Home () {
+  return <BarFetch />
 }
