@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { MyRoutes, BlogPost } from "./pages/routes";
 import EstacaoProvider from "./context/EstacaoContext";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 function App() {
   return (
