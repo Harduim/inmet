@@ -18,5 +18,5 @@
         - Nova página => Elaborar etapas necessárias para criação de uma nova pagina/feature
         - Novo componente => ^^^^
     - Onde colocar as coisas
-    - Diagrama da arquitetura
+    - Diagrama da arquitetura https://lucid.app/
     - Arvore de pastas
