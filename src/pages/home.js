@@ -69,7 +69,7 @@ function BarFetch () {
               y: data.map((el) => el.TEMP_MAX),
               type: typePlot(),
               mode: 'lines+markers',
-              marker: { color: 'red' }
+              marker: { color: 'blue' }
             }
           ]}
           style={{
