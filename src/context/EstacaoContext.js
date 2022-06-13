@@ -27,7 +27,6 @@ export const EstacaoProvider = ({ children }) => {
   const estacoes = estacoesQuery.data
 
   const estacoesTeste = estacoes
-  console.log(estacoesTeste)
 
   const provides = {
     estacao,
