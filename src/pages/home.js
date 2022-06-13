@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Plot from "react-plotly.js";
 import { Link, useParams } from "react-router-dom";
 
 import { useEstacao } from "../context/EstacaoContext";
+import placeholderData from "./placeholderData";
+import { queryClient } from "../App";
+
+const arrPlaceHolder = [placeholderData];
 
 export const typePlot = () => {
-  return "scatter";
+  return "bar";
 };
 
-function BarFetch() {
+function ScatterFetch() {
   const { estacaoId, setEstacao } = useEstacao();
 
   const { idEstacao } = useParams();
@@ -33,8 +37,17 @@ function BarFetch() {
       refetchOnWindowFocus: false,
       retry: false,
       staleTime: 1000 * 50,
+      placeholderData: arrPlaceHolder.at(-1)
     }
   );
+
+  useEffect(() => {
+    if (data) {
+      arrPlaceHolder[1] = data;
+
+      console.log(arrPlaceHolder);
+    }
+  });
 
   if (isLoading) return "Loading...";
 
@@ -56,20 +69,31 @@ function BarFetch() {
 
   return (
     <div>
-      <section>
         <p
           style={{ textAlign: "center", marginTop: "20px" }}
         >{`${data[0].DC_NOME} - ${data[0].CD_ESTACAO}`}</p>
+      <section style={{display: "flex"}}>
         <Plot
           data={[
             {
               x: data.map((el) => el.DT_MEDICAO),
               y: data.map((el) => el.TEMP_MAX),
+              line: {simplify: false},
               type: typePlot(),
               mode: "lines+markers",
               marker: { color: "red" },
             },
           ]}
+          layout={{
+            transition: {
+              duration: 500,
+              easing: "cubic-in-out",
+            },
+            yaxis: {
+              autorange: false,
+              range: [0, 42],
+            },
+          }}
           style={{
             width: "100%",
             height: "100%",
@@ -97,5 +121,5 @@ function BarFetch() {
 }
 
 export function Home() {
-  return <BarFetch />;
+  return <ScatterFetch />;
 }

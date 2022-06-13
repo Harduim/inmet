@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { QueryClient, useQuery } from "react-query";
 import Plot from "react-plotly.js";
+
 import placeholderData from "./placeholderData";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -26,8 +27,8 @@ export const AnimationFetch = () => {
       refetchOnWindowFocus: false,
       retry: false,
       staleTime: 1000 * 50,
-      placeholderData: arrPlaceHolder.at(-1)
       //placeholderData: () => queryClient.getQueryData([queryKeyAnimation, estacaoId])
+      placeholderData: arrPlaceHolder.at(-1)
     }
   );
 
@@ -35,11 +36,19 @@ export const AnimationFetch = () => {
     queryClient.getQueriesData(queryKeyAnimation).at(-1)[1] ? true : false
   );
 
+  // useEffect(() => {
+  //   if (queryClient.getQueryData([queryKeyAnimation, estacaoId])) {
+  //     arrPlaceHolder.push(
+  //       queryClient.getQueryData([queryKeyAnimation, estacaoId])
+  //     );
+
+  //     console.log(arrPlaceHolder);
+  //   }
+  // });
+
   useEffect(() => {
-    if (queryClient.getQueryData([queryKeyAnimation, estacaoId])) {
-      arrPlaceHolder.push(
-        queryClient.getQueryData([queryKeyAnimation, estacaoId])
-      );
+    if (data) {
+      arrPlaceHolder.push(data);
 
       console.log(arrPlaceHolder);
     }

@@ -11,7 +11,6 @@ export const typePlot = () => {
 
 function Example() {
 
-  let animal = 1
   const { estacaoId, setEstacao } = useEstacao();
   const { isLoading, error, data, isFetching } = useQuery(
     ["data", estacaoId],
@@ -66,7 +65,7 @@ function Example() {
           ]}
           layout={{
             transition: {
-              duration: 2000,
+              duration: 500,
               easing: "cubic-in-out",
             },
             yaxis: {
