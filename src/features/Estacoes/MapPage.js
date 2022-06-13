@@ -12,7 +12,7 @@ const MapPage = () => {
   const [selected, setSelected] = useState([])
 
   if (estacoesIsLoading) {
-    return <PageFrame> </PageFrame>
+    return <PageFrame>Teste </PageFrame>
   }
 
 

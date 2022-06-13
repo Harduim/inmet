@@ -26,6 +26,9 @@ export const EstacaoProvider = ({ children }) => {
   const estacoesIsLoading = estacoesQuery.isLoading
   const estacoes = estacoesQuery.data
 
+  const estacoesTeste = estacoes
+  console.log(estacoesTeste)
+
   const provides = {
     estacao,
     estacoes,
