@@ -69,7 +69,7 @@ const PageFrame = (props) => {
           itemId='grp-2'
           isActive={false}
         >
-          <a href='#/estacoes/bar'>Bar</a>
+          <a href='/estacoes/bar'>Bar</a>
         </NavItem>
         <NavItem
           groupId='grp-2'
@@ -85,6 +85,13 @@ const PageFrame = (props) => {
         >
           <a href='https://portal.inmet.gov.br/manual'>Manual</a>
         </NavItem>
+        <NavItem
+          groupId='grp-2'
+          itemId='grp-2'
+          isActive={false}
+        >
+          <a href='/teste'>Teste</a>
+        </NavItem>
 
       </NavList>
     </Nav>
@@ -93,8 +100,9 @@ const PageFrame = (props) => {
 
   return (
     <Page header={Header} sidebar={Sidebar} isManagedSidebar mainContainerId='mainContainerId'>
-      <PageSection isFilled variant={PageSectionVariants.light}>
+      <PageSection isFilled variant={PageSectionVariants.light} className='.pf-u-p-0'>
         {children}
+        
       </PageSection>
     </Page>
   )

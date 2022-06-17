@@ -6,7 +6,7 @@ const Home = () => {
   const { estacoes, estacao, estacoesIsLoading } = useContext(EstacaoContext)
   return (
     <PageFrame>
-      <div>OI</div>
+      <div>TESTE</div>
       <div>{JSON.stringify(estacao)}</div>
       <div>{JSON.stringify(estacoesIsLoading)}</div>
       <div>OI</div>
