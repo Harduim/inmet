@@ -15,6 +15,9 @@
     - 
 
 - Arquitetura
+
+![Arquitetura_Frontend_INMET_Diagrama](public/Arquitetura_Frontend_INMET_Diagrama.svg)
+
     - Exemplos
         - Nova página => Elaborar etapas necessárias para criação de uma nova pagina/feature
         - Novo componente => ^^^^
