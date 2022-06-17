@@ -8,7 +8,7 @@
 
 - Configuração do ambiente de desenvolvimento
     - Variáveis ambientais
-    - Git hooks 'standard'
+    - Git hooks 'standard' => Adicionar instruções de instalação
     - Formato de commits: [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
 
 - Ferramentas
