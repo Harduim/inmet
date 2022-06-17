@@ -1,181 +1,156 @@
-import React, { useState } from "react";
-import Plot from "react-plotly.js";
+import React, { useState } from 'react'
+import Plot from 'react-plotly.js'
 
 export const AnimationPlot = () => {
-  const [data, setData] = useState([10, 20, 30]);
-  const [layout, setLayout] = useState({ height: 500, width: 500 });
-  const [config, setConfig] = useState({});
-  const [frame, setFrame] = useState({});
-  const [revision, setRevision] = useState(0);
-
-  const BarChart = () => {
-    return (
-      <div style={{ display: "flex" }}>
-        <Plot
-          data={data}
-          layout={layout}
-          frame={frame}
-          config={config}
-          onInitialized={(figure) => onInitialized(figure)}
-          onTransitioning={(figure) => onTransitioning(figure)}
-          onAfterPlot={(figure) => onAfterPlot(figure)}
-          onRelayout={(figure) => onRelayout(figure)}
-          //revision={this.props.revision}
-        />
-      </div>
-    );
-  };
+  const [data, setData] = useState([10, 20, 30])
+  const [layout, setLayout] = useState({ height: 500, width: 500 })
+  const [config, setConfig] = useState({})
+  const [frame, setFrame] = useState({})
+  const [revision, setRevision] = useState(0)
 
   const propData = [
     {
-      x: ["giraffes", "orangutans", "monkeys"],
+      x: ['giraffes', 'orangutans', 'monkeys'],
       y: [10, 20, 30],
-      type: "bar",
-      tag: "initial",
+      type: 'bar',
+      tag: 'initial'
     },
     {
-      x: ["giraffes", "orangutans", "monkeys"],
+      x: ['giraffes', 'orangutans', 'monkeys'],
       y: [-3, -5, -7],
-      type: "bar",
-      tag: "initial",
-    },
-  ];
+      type: 'bar',
+      tag: 'initial'
+    }
+  ]
 
-  const newData = [...propData];
+  const newData = [...propData]
   const initiaData = propData.map((item) => {
     return {
       ...item,
-      tag: "initial",
+      tag: 'initial',
       y: item.y.map((yvalue) => {
-        return 0;
-      }),
-    };
-  });
-
+        return 0
+      })
+    }
+  })
   const initializedata = () => {
     // set the initial value as zero in order to create animation
 
-    console.log("below is initial data");
-    console.log(initiaData);
+    console.log('below is initial data')
+    console.log(initiaData)
     const newlayout = {
       ...layout,
-      title: "chart from initialized1",
+      title: 'chart from initialized1',
       transition: {
         duration: 2000,
-        easing: "cubic-in-out",
-      },
-    };
+        easing: 'cubic-in-out'
+      }
+    }
     const newframe = {
-      duration: 2000,
-    };
+      duration: 2000
+    }
 
-    setData(initiaData);
-    setLayout(newlayout);
-    setFrame(newframe);
-  };
+    setData(initiaData)
+    setLayout(newlayout)
+    setFrame(newframe)
+  }
 
   const onInitialized = (figure) => {
-    console.log("initialized");
-    initializedata();
-  };
+    console.log('initialized')
+    initializedata()
+  }
 
   const onClick = () => {
-    console.log("clicked parent");
+    console.log('clicked parent')
     const newData = [
       {
-        x: ["giraffes", "orangutans", "monkeys"],
+        x: ['giraffes', 'orangutans', 'monkeys'],
         y: [Math.random(), Math.random(), Math.random()],
-        type: "bar",
+        type: 'bar'
       },
       {
-        x: ["giraffes", "orangutans"],
+        x: ['giraffes', 'orangutans'],
         y: [Math.random(), Math.random()],
-        type: "bar",
-      },
-    ];
+        type: 'bar'
+      }
+    ]
     const newlayout = {
       ...layout,
       transition: {
-        duration: 5000,
-        easing: "cubic-in",
+        duration: 1000,
+        easing: 'cubic-in'
       },
-      title: "updated",
-    };
+      title: 'updated'
+    }
     const newframe = {
-      duration: 2000,
-    };
+      duration: 1000
+    }
 
-    //console.log(newlayout)
+    console.log(newlayout)
 
-    setData(newData);
-    //setLayout(newlayout);
-    //setFrame(newframe);
-    setRevision(revision + 1);
-  };
+    setData(newData)
+    setRevision(revision + 1)
+  }
 
   const onTransitioning = (figure) => {
-    console.log("on transition");
-  };
+    console.log('on transition')
+  }
 
   const onAfterPlot = (figure) => {
-    console.log("onAfterPlot start");
-    console.log(data.length);
-    console.log(data[0]);
+    console.log('onAfterPlot start')
+    console.log(data.length)
+    console.log(data[0])
     if (data.length === 0 || data[0].tag) {
-      console.log("set state at after plot");
-      const newData = propData;
-      console.log(layout);
+      console.log('set state at after plot')
+      const newData = propData
+      console.log(layout)
       const newlayout = {
         ...layout,
         transition: {
           duration: 2000,
-          easing: "cubic-in-out",
+          easing: 'cubic-in-out'
         },
-        //configure autorange to true for layout change
+        // configure autorange to true for layout change
         xaxis: { ...layout.xaxis, autorange: true },
         yaxis: { ...layout.yaxis, autorange: true },
-        title: "after plot title",
-      };
+        title: 'after plot title'
+      }
 
-      console.log("revision");
-      console.log(revision);
+      console.log('revision')
+      console.log(revision)
 
-      setData(newData);
-      setLayout(newlayout);
-      setFrame({ duration: 2000 });
-      console.log(layout.title);
+      setData(newData)
+      setLayout(newlayout)
+      setFrame({ duration: 2000 })
+      console.log(layout.title)
     }
-  };
+  }
 
   const onRelayout = () => {
-    console.log("relayout");
-  };
+    console.log('relayout')
+  }
   const onupdate = () => {
     if (data.length > 0) {
-      console.log("teste onupdate");
-      return;
+      return
     }
-    console.log("onupdate");
-  };
+    console.log('onupdate')
+  }
 
   return (
-    <section>
+    <section style={{ textAlign: 'center' }}>
       <button onClick={onClick}>Animate</button>
-      <div style={{ display: "flex" }}>
-        <Plot
-          data={data}
-          layout={layout}
-          frame={frame}
-          config={config}
-          onupdate={onupdate}
-          onClick={onClick}
-          onInitialized={onInitialized}
-          onTransitioning={onTransitioning}
-          onAfterPlot={onAfterPlot}
-          onRelayout={onRelayout}
-          revision={revision}
-        />
-        </div>
+      <Plot
+        data={data}
+        layout={layout}
+        frame={frame}
+        onInitialized={onInitialized}
+        onupdate={onupdate}
+        onClick={onClick}
+        onTransitioning={onTransitioning}
+        onAfterPlot={onAfterPlot}
+        onRelayout={onRelayout}
+        revision={revision}
+      />
     </section>
-  );
-};
+  )
+}

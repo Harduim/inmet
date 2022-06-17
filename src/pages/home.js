@@ -1,63 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import Plot from "react-plotly.js";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from 'react'
+import { useQuery } from 'react-query'
+import Plot from 'react-plotly.js'
+import { Link, useParams } from 'react-router-dom'
 
-import { useEstacao } from "../context/EstacaoContext";
-import placeholderData from "./placeholderData";
-import { queryClient } from "../App";
-
-const arrPlaceHolder = [placeholderData];
+import { useEstacao } from '../context/EstacaoContext'
 
 export const typePlot = () => {
-  return "bar";
-};
+  return 'scatter'
+}
 
-function ScatterFetch() {
-  const { estacaoId, setEstacao } = useEstacao();
+function BarFetch () {
+  const { estacaoId, setEstacao } = useEstacao()
 
-  const { idEstacao } = useParams();
-  if(idEstacao) {
-    const value = +idEstacao.slice(1,4)
+  const { idEstacao } = useParams()
+  if (idEstacao) {
+    const value = +idEstacao.slice(1, 4)
 
     setEstacao(value)
   }
 
   const { isLoading, error, data, isFetching } = useQuery(
-    ["data", estacaoId],
+    ['data', estacaoId],
     () => {
       return fetch(
         `https://apitempo.inmet.gov.br/estacao/diaria/2019-10-01/2019-10-31/A${estacaoId}`
-      ).then((res) => res.json());
+      ).then((res) => res.json())
     },
     {
       onError: (error) => {
-        console.log(error);
+        console.log(error)
       },
       refetchOnWindowFocus: false,
       retry: false,
-      staleTime: 1000 * 50,
-      placeholderData: arrPlaceHolder.at(-1)
+      staleTime: 1000 * 50
     }
-  );
+  )
 
-  useEffect(() => {
-    if (data) {
-      arrPlaceHolder[1] = data;
+  if (isLoading) return 'Loading...'
 
-      console.log(arrPlaceHolder);
-    }
-  });
-
-  if (isLoading) return "Loading...";
-
-  if (error)
+  if (error) {
     return (
       <section>
-        <p style={{ textAlign: "center", marginTop: "20px" }}>
-          {"An error has occurred: " + error.message}
+        <p style={{ textAlign: 'center', marginTop: '20px' }}>
+          {'An error has occurred: ' + error.message}
         </p>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <Link to={`/scatter/A${estacaoId + 1}`}>
             <button onClick={() => setEstacao((estacao) => estacao + 1)}>
               Next
@@ -65,42 +52,33 @@ function ScatterFetch() {
           </Link>
         </div>
       </section>
-    );
+    )
+  }
 
   return (
     <div>
+      <section>
         <p
-          style={{ textAlign: "center", marginTop: "20px" }}
-        >{`${data[0].DC_NOME} - ${data[0].CD_ESTACAO}`}</p>
-      <section style={{display: "flex"}}>
+          style={{ textAlign: 'center', marginTop: '20px' }}
+        >{`${data[0].DC_NOME} - ${data[0].CD_ESTACAO}`}
+        </p>
         <Plot
           data={[
             {
               x: data.map((el) => el.DT_MEDICAO),
               y: data.map((el) => el.TEMP_MAX),
-              line: {simplify: false},
               type: typePlot(),
-              mode: "lines+markers",
-              marker: { color: "red" },
-            },
+              mode: 'lines+markers',
+              marker: { color: 'red' }
+            }
           ]}
-          layout={{
-            transition: {
-              duration: 500,
-              easing: "cubic-in-out",
-            },
-            yaxis: {
-              autorange: false,
-              range: [0, 42],
-            },
-          }}
           style={{
-            width: "100%",
-            height: "100%",
+            width: '100%',
+            height: '100%'
           }}
         />
       </section>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: 'center' }}>
         <Link to={`/scatter/A${estacaoId - 1}`}>
           <button onClick={() => setEstacao((estacao) => estacao - 1)}>
             Prev
@@ -115,11 +93,11 @@ function ScatterFetch() {
           <button>Bar</button>
         </Link>
       </div>
-      {isFetching && <p style={{ textAlign: "center" }}>Atualizando dados.</p>}
+      {isFetching && <p style={{ textAlign: 'center' }}>Atualizando dados.</p>}
     </div>
-  );
+  )
 }
 
-export function Home() {
-  return <ScatterFetch />;
+export function Home () {
+  return <BarFetch />
 }

@@ -3,27 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@patternfly/patternfly": "^4.179.1",
-    "@patternfly/react-core": "^4.198.5",
-    "@reduxjs/toolkit": "^1.8.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.27.2",
-    "plotly.js": "^2.12.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-plotly.js": "^2.5.1",
-    "react-query": "^3.39.1",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "5.0.0"
+    "@patternfly/patternfly": "~4.192.1",
+    "@patternfly/react-charts": "~6.59.2",
+    "@patternfly/react-core": "~4.206.2",
+    "@patternfly/react-table": "~4.75.2",
+    "@react-navigation/native": "~6.0.10",
+    "@testing-library/jest-dom": "~5.16.4",
+    "@testing-library/react": "~11.2.7",
+    "@testing-library/user-event": "~12.8.3",
+    "axios": "~0.24.0",
+    "d3-array": "^3.1.6",
+    "npm-reinstall": "~1.0.5",
+    "plotly.js": "~2.11.1",
+    "plotly.js-dist-min": "~2.11.1",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
+    "react-plotly.js": "~2.5.1",
+    "react-router": "~6.3.0",
+    "react-router-dom": "~5.3.1",
+    "react-scripts": "~5.0.1",
+    "styled-components": "~5.3.5",
+    "uninstall": "0.0.0",
+    "victory": "~36.3.2",
+    "web-vitals": "~1.1.2",
+    "react-query": "~3.39.1"
+  },
+  "devDependencies": {
+    "standard": "*"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "standard --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
