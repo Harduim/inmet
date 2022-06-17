@@ -3,8 +3,6 @@ import {
   Page,
   Masthead,
   MastheadToggle,
-  MastheadMain,
-  MastheadBrand,
   MastheadContent,
   PageSidebar,
   PageSection,
@@ -102,7 +100,7 @@ const PageFrame = (props) => {
     <Page header={Header} sidebar={Sidebar} isManagedSidebar mainContainerId='mainContainerId'>
       <PageSection isFilled variant={PageSectionVariants.light} className='.pf-u-p-0'>
         {children}
-        
+
       </PageSection>
     </Page>
   )

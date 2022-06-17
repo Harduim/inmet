@@ -1,14 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 import api from '../services/api'
 import { useQuery } from 'react-query'
 
 const EstacaoContext = createContext(true)
 
 export const EstacaoProvider = ({ children }) => {
-  const [estacaoId, setEstacaoId] = useState('A301')
-  const [estacao, setEstacao] = useState()
+  const [estacaoId] = useState('A301')
+  const [estacao] = useState()
 
-  const getEstacaoById = eid => estacoes.find(e => e.CD_ESTACAO == eid)
+  const getEstacaoById = eid => estacoes.find(e => e.CD_ESTACAO === eid)
 
   const estacoesQuery = useQuery(
     ['estacoes'],
@@ -26,17 +26,15 @@ export const EstacaoProvider = ({ children }) => {
   const estacoesIsLoading = estacoesQuery.isLoading
   const estacoes = estacoesQuery.data
 
-  const estacoesTeste = estacoes
-
   const provides = {
     estacao,
     estacoes,
     estacoesIsLoading,
     getEstacaoById,
-    estacaoId,
+    estacaoId
   }
 
   return <EstacaoContext.Provider value={provides}>{children}</EstacaoContext.Provider>
-};
+}
 
 export default EstacaoContext

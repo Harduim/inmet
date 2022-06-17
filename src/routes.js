@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from './features/Home'
 import { BarPage, MapPage, LinePage } from './features/Estacoes'
-import TypeaheadSelectInput from './pages/pageTeste'
 
 const Router = () => {
   return (

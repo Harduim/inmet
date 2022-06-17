@@ -5,7 +5,7 @@ import { EstacaoProvider } from './context/EstacaoContext'
 
 const queryClient = new QueryClient()
 
-function App() {
+function App () {
   return (
     <QueryClientProvider client={queryClient}>
       <EstacaoProvider>
