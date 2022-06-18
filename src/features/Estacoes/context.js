@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react'
-import api from '../services/api'
+import api from '../../services/api'
 import { useQuery } from 'react-query'
 
-const EstacaoContext = createContext(true)
+const context = createContext(true)
 
-export const EstacaoProvider = ({ children }) => {
+export const Provider = ({ children }) => {
   const [estacaoId] = useState('A301')
   const [estacao] = useState()
 
@@ -34,7 +34,7 @@ export const EstacaoProvider = ({ children }) => {
     estacaoId
   }
 
-  return <EstacaoContext.Provider value={provides}>{children}</EstacaoContext.Provider>
+  return <context.Provider value={provides}>{children}</context.Provider>
 }
 
-export default EstacaoContext
+export default context

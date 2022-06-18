@@ -1,10 +1,10 @@
-import PageFrame from '../shared/PageFrame'
+import Layout from '../shared/Layout'
 
 const Home = () => {
   return (
-    <PageFrame>
+    <Layout>
       <div>Home</div>
-    </PageFrame>
+    </Layout>
   )
 }
 
