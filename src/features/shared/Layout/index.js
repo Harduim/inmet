@@ -6,7 +6,7 @@ const Layout = (props) => {
   const { children } = props
 
   return (
-    <Page header={<Header />} sidebar={<Sidebar />}>
+    <Page isManagedSidebar header={<Header />} sidebar={<Sidebar />}>
       <PageSection isFilled variant={PageSectionVariants.light}>
         {children}
       </PageSection>
