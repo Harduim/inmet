@@ -30,9 +30,6 @@
 
 https://www.patternfly.org/v4/
 
-Blues          https://coolors.co/c3e7f6-9be2f3-5bc5f2-1cadeb-0977b2-054b70-042f47-02151f
-Cyans          https://coolors.co/effbfa-9be5d9-62d7c3-00987e-006556-003d33-002822-001412
-
 Personalizando o Patternfly
 
 https://www.patternfly.org/v4/developer-resources/global-css-variables

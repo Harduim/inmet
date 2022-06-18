@@ -1,7 +1,87 @@
-.pf-c-page__sidebar.pf-m-expanded{
+.pf-c-page__sidebar.pf-m-expanded {
     min-height: calc(100vh - 70px);
 }
 
 .pf-c-page__sidebar {
     height: calc(100vh - 76px);
+}
+
+
+/* Patternfly Overrides */
+:root {
+    /* Fonts */
+    --pf-global--FontFamily--sans-serif: helvetica, arial, sans-serif;
+    --pf-global--FontFamily--heading--sans-serif: helvetica, arial, sans-serif;
+
+    /* Base Colors */
+
+    --pf-global--palette--blue-50: #c3e7f6;
+    --pf-global--palette--blue-100: #9be2f3;
+    --pf-global--palette--blue-200: #5bc5f2;
+    --pf-global--palette--blue-300: #1cadeb;
+    --pf-global--palette--blue-400: #0977b2;
+    --pf-global--palette--blue-500: #054b70;
+    --pf-global--palette--blue-600: #042f47;
+    --pf-global--palette--blue-700: #02151f;
+
+    --pf-global--palette--cyan-50: #effbfa;
+    --pf-global--palette--cyan-100: #9be5d9;
+    --pf-global--palette--cyan-200: #62d7c3;
+    --pf-global--palette--cyan-300: #00987e;
+    --pf-global--palette--cyan-400: #006556;
+    --pf-global--palette--cyan-500: #003d33;
+    --pf-global--palette--cyan-600: #002822;
+    --pf-global--palette--cyan-700: #001412;
+
+    --pf-global--palette--orange-50: #fff1eb;
+    --pf-global--palette--orange-100: #f69d79;
+    --pf-global--palette--orange-200: #f26831;
+    --pf-global--palette--orange-300: #ee4906;
+    --pf-global--palette--orange-400: #c23800;
+    --pf-global--palette--orange-500: #8f2900;
+    --pf-global--palette--orange-600: #7a2500;
+    --pf-global--palette--orange-700: #3d1300;
+
+    --pf-global--palette--red-50: #faebf1;
+    --pf-global--palette--red-100: #be1357;
+    --pf-global--palette--red-200: #9b084d;
+    --pf-global--palette--red-300: #770d36;
+    --pf-global--palette--red-400: #440422;
+    --pf-global--palette--red-500: #270213;
+
+    --pf-global--link--Color: #1f34ad;
+    --pf-global--link--Color--hover: #13206d;
+    --pf-global--link--Color--light: #4866d6;
+    --pf-global--link--Color--light--hover: #869ae4;
+    --pf-global--link--Color--dark: #1f34ad;
+    --pf-global--link--Color--dark--hover: #13206d;
+    --pf-global--link--Color--visited: #631489;
+
+    --pf-global--active-color--100: #6fee00;
+    --pf-global--active-color--200: #e4fac0;
+    --pf-global--active-color--300: #9ef83e;
+    --pf-global--active-color--400: #bffa80;
+
+    --pf-global--primary-color--100: #6fee00;
+    --pf-global--primary-color--200: #e4fac0;
+    --pf-global--primary-color--light-100: #9ef83e;
+    --pf-global--primary-color--dark-100: #bffa80;
+
+    --pf-global--Color--100: #3d1300;
+    --pf-global--Color--200: #c23800;
+    --pf-global--Color--300: #7a2500;
+    --pf-global--Color--400: #ee4906;
+    --pf-global--Color--light-100: #fff;
+    --pf-global--Color--light-200: #f3ecec;
+    --pf-global--Color--light-300: #dac8d1;
+    --pf-global--Color--dark-100: #3d1300;
+    --pf-global--Color--dark-200: #c23800;
+
+    --pf-global--BackgroundColor--dark-100: #3d1300;
+    --pf-global--BackgroundColor--dark-200: #c23800;
+    --pf-global--BackgroundColor--dark-300: #7a2500;
+    --pf-global--BackgroundColor--dark-400: #ee4906;
+    --pf-global--BackgroundColor--dark-transparent-100: rgba(61, 19, 0, 0.62); 
+    --pf-global--BackgroundColor--dark-transparent-200: rgba(61, 19, 0, 0.62);
+
 }
