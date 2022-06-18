@@ -1,6 +1,6 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import Router from './routes'
+import Router from './Router'
 import { EstacaoProvider } from './context/EstacaoContext'
 
 const queryClient = new QueryClient()
