@@ -1,22 +1,31 @@
-import Layout from '../shared/Layout'
-import { useContext } from 'react'
-import context, { Provider } from './context'
-import { useParams } from 'react-router-dom'
+import Layout from "../shared/Layout";
+import { useContext } from "react";
+import context, { Provider } from "./context";
+import filterContext, { FilterProvider } from "./filterContext";
+import { useParams } from "react-router-dom";
+import FilterForm from "./FilterForm";
 
 const Estacoes = () => {
-  const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } = useContext(context)
+  const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
+    useContext(context);
 
-  const { cdEstacao } = useParams()
+  const { cdEstacao } = useParams();
 
   if (estacoesIsLoading) {
-    return <Layout>Teste 2</Layout>
+    return <Layout>Teste 2</Layout>;
   }
 
   return (
     <Layout>
-      <div>MAP {JSON.stringify(getEstacaoById(cdEstacao || estacaoId))} {JSON.stringify(estacao)}</div>
+      <FilterForm />
     </Layout>
-  )
-}
+  );
+};
 
-export default () => <Provider><Estacoes /></Provider>
+export default () => (
+  <Provider>
+    <FilterProvider>
+      <Estacoes />
+    </FilterProvider>
+  </Provider>
+);

@@ -12,7 +12,7 @@ export const Provider = ({ children }) => {
 
   const estacoesQuery = useQuery(
     ['estacoes'],
-    () => api.get('/T').then(r => r.data),
+    () => api.get('/estacoes/T').then(r => r.data),
     {
       onError: (error) => {
         console.log(error)
@@ -33,7 +33,6 @@ export const Provider = ({ children }) => {
     getEstacaoById,
     estacaoId
   }
-
   return <context.Provider value={provides}>{children}</context.Provider>
 }
 
