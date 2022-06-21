@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import context from "./context";
-import filterContext, { FilterProvider } from "./filterContext";
+import filterContext from "./filterContext";
 
 import {
   Select,
   SelectOption,
   SelectVariant,
-  SelectGroup,
-  OptionsMenu,
   DatePicker,
   Button,
 } from "@patternfly/react-core";
@@ -70,6 +68,7 @@ const SelectEstacao = () => {
       isOpen={isOpen}
       placeholderText={estacao}
       maxHeight={200}
+      width={400}
     >
       {listEstacoes}
     </Select>
@@ -110,8 +109,6 @@ const DatePickerMinMax = ({ value, id }) => {
     } else if (date > maxDate) {
       return "Date is after the allowable range.";
     }
-
-    return "";
   };
 
   const handleClick = (e) => {
@@ -132,36 +129,96 @@ const DatePickerMinMax = ({ value, id }) => {
   );
 };
 
-const Selecteds = () => {
-  const { _initialDateFormat, _finalDateFormat, _codEstacao, dataEstacao } =
-    useContext(filterContext);
+const SelectAtributo = () => {
+  const { atributo, setAtributo } = useContext(filterContext);
+  const [isOpen, setOpen] = useState(null);
+  const [selected, setSelected] = useState(null);
 
-  const listData = () => {
-    if(dataEstacao) {
-      const dataList = dataEstacao.map(({DT_MEDICAO, DC_NOME}) => (
-        <p>
-          {DT_MEDICAO} {DC_NOME}
-        </p>
-      ))
-      console.log('teste')
-      return dataList
+  const listAtributos = [
+    <SelectOption
+      datakey="CHUVA"
+      key="CHUVA"
+      value="Precipitação Total"
+      unidade="mm"
+    />,
+    <SelectOption
+      datakey="TEMP_MAX"
+      key="TEMP_MAX"
+      value="Temperatura Máxima"
+      unidade="°C"
+    />,
+    <SelectOption
+      datakey="TEMP_MED"
+      key="TEMP_MED"
+      value="Temperatura Média"
+      unidade="°C"
+    />,
+    <SelectOption
+      datakey="TEMP_MIN"
+      key="TEMP_MIN"
+      value="Temperatura Mínima"
+      unidade="°C"
+    />,
+    <SelectOption
+      datakey="UMID_MED"
+      key="UMID_MED"
+      value="Umidade Relativa do Ar Média"
+      unidade="%"
+    />,
+    <SelectOption
+      datakey="UMID_MIN"
+      key="UMID_MIN"
+      value="Umidade Relativa do Ar Mínima"
+      unidade="%"
+    />,
+    <SelectOption
+      datakey="VEL_VENTO_MED"
+      key="VEL_VENTO_MED"
+      value="Vento Velocidade Média"
+      unidade="m/s"
+    />,
+  ];
+
+  const onToggle = (isOpen) => setOpen(isOpen);
+  const onSelect = (event, selection, isPlaceHolder) => {
+    if (isPlaceHolder) clearSelection();
+    else {
+      setSelected(selection);
+      setAtributo(event.target.getAttribute("datakey"));
+      setOpen(false);
+    }
+  };
+
+  const clearSelection = () => {
+    setSelected(null);
+    setOpen(false);
+  };
+
+  const customFilter = (_, value) => {
+    if (!value) {
+      return listAtributos;
     }
 
-    return null
-  }
+    const input = new RegExp(value, "i");
+    return listAtributos.filter((child) => input.test(child.props.value));
+  };
 
-  console.log(dataEstacao)
   return (
-    <>
-      {_codEstacao && (
-        <>
-          <p>{_codEstacao}</p>
-          <p>{_initialDateFormat}</p>
-          <p>{_finalDateFormat}</p>
-          <section>{listData()}</section>
-        </>
-      )}
-    </>
+    <Select
+      variant={SelectVariant.typeahead}
+      typeAheadAriaLabel="Selecione o atributo"
+      onToggle={onToggle}
+      onSelect={onSelect}
+      onClear={clearSelection}
+      onFilter={customFilter}
+      selections={selected}
+      isOpen={isOpen}
+      placeholderText={atributo}
+      maxHeight={200}
+      width={200}
+    >
+      {listAtributos}
+    </Select>
   );
 };
 
@@ -170,14 +227,38 @@ const ButtonFilter = () => {
     estacao,
     initialDate,
     finalDate,
+    dataEstacao,
+    atributo,
+    atributoFinal,
     setInitialDateFormat,
     setFinalDateFormat,
     setCodEstacao,
+    setAtributo,
+    setAtributoFinal,
+    validador,
+    setValidador,
   } = useContext(filterContext);
 
   const dateFormat = (date) => {
     return date.split("-").reverse().join("-");
   };
+
+  const newDate = (date) => {
+    const arrDate = date.split('-')
+
+    return new Date ([arrDate[1],arrDate[0],arrDate[2]].join('-'))
+  }
+  const validarDatas = () => {
+    const day1 = newDate(initialDate)
+    const day2 = newDate(finalDate)
+
+    console.log(day2 - day1)
+    setValidador((day2 - day1) > 0)
+  }
+
+  // const validar = () => {
+  //   if(estacao && atributo && )
+  // }
 
   const handleClick = () => {
     const initialDateFormat = dateFormat(initialDate);
@@ -187,8 +268,8 @@ const ButtonFilter = () => {
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);
-
-    console.log("button teste");
+    setAtributoFinal(atributo);
+    validarDatas()
   };
 
   return (
@@ -202,10 +283,10 @@ const FilterForm = () => {
   return (
     <>
       <SelectEstacao />
+      <SelectAtributo />
       <DatePickerMinMax id="initial" />
       <DatePickerMinMax id="final" />
       <ButtonFilter></ButtonFilter>
-      <Selecteds />
     </>
   );
 };

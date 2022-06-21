@@ -8,17 +8,22 @@ export const FilterProvider = ({ children }) => {
   const [estacao, setEstacao] = useState("A301 - RECIFE");
   const [initialDate, setInitialDate] = useState("01-10-2019");
   const [finalDate, setFinalDate] = useState("31-10-2019");
+  const [atributo, setAtributo] = useState("CHUVA");
   const [dataEstacao, setDataEstacao] = useState(null);
-  const [_initialDateFormat, setInitialDateFormat] = useState("2019-10-01");
-  const [_finalDateFormat, setFinalDateFormat] = useState("2019-10-31");
-  const [_codEstacao, setCodEstacao] = useState("A301");
+  const [initialDateFormat, setInitialDateFormat] = useState("2019-10-01");
+  const [finalDateFormat, setFinalDateFormat] = useState("2019-10-31");
+  const [codEstacao, setCodEstacao] = useState("A301");
+  const [atributoFinal, setAtributoFinal] = useState("CHUVA");
 
+  const [validador, setValidador] = useState(true);
+
+  console.log(validador)
   const dataPlot = useQuery(
-    ["dataPlot", _initialDateFormat, _finalDateFormat, _codEstacao],
+    ["dataPlot", initialDateFormat, finalDateFormat, codEstacao],
     () =>
       api
         .get(
-          `estacao/diaria/${_initialDateFormat}/${_finalDateFormat}/${_codEstacao}`
+          `estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
         )
         .then((r) => r.data),
     {
@@ -26,18 +31,18 @@ export const FilterProvider = ({ children }) => {
         console.log("erro no fetch dos dados");
       },
       onSuccess: (data) => {
-        setDataEstacao(data)
-        console.log('fetch sucess');
+        setDataEstacao(data);
+        console.log("fetch sucess");
       },
       refetchOnWindowFocus: false,
       retry: false,
-      staleTime: 1000 * 3600,
+      staleTime: 1000 * 5,
     }
   );
 
-  if (dataPlot.data) {
-    console.log(dataPlot.data[0].DC_NOME);
-  }
+  // if(dataPlot) {
+  //   console.log(dataPlot)
+  // }
 
   const provides = {
     estacao,
@@ -48,12 +53,18 @@ export const FilterProvider = ({ children }) => {
     setFinalDate,
     dataEstacao,
     setDataEstacao,
-    _initialDateFormat,
+    initialDateFormat,
     setInitialDateFormat,
-    _finalDateFormat,
+    finalDateFormat,
     setFinalDateFormat,
-    _codEstacao,
+    codEstacao,
     setCodEstacao,
+    atributo,
+    setAtributo,
+    atributoFinal,
+    setAtributoFinal,
+    validador,
+    setValidador,
   };
 
   return (

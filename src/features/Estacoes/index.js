@@ -4,6 +4,7 @@ import context, { Provider } from "./context";
 import filterContext, { FilterProvider } from "./filterContext";
 import { useParams } from "react-router-dom";
 import FilterForm from "./FilterForm";
+import ChartLine from "./ChartLine";
 
 const Estacoes = () => {
   const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
@@ -18,6 +19,7 @@ const Estacoes = () => {
   return (
     <Layout>
       <FilterForm />
+      <ChartLine />
     </Layout>
   );
 };
