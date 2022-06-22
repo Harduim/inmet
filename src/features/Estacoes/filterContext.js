@@ -1,6 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import api from "../../services/api";
+import { useLocation, useParams } from "react-router-dom";
 
 const filterContext = createContext(true);
 
@@ -16,16 +17,31 @@ export const FilterProvider = ({ children }) => {
   const [atributoFinal, setAtributoFinal] = useState("CHUVA");
 
   const [validador, setValidador] = useState(true);
+  const { atributoId, initialDateId, finalDateId, codEstacaoId } = useParams();
 
-  console.log(validador)
-  const dataPlot = useQuery(
+  useEffect(() => {
+    if (atributoId && initialDateId && finalDateId && codEstacaoId) {
+      setInitialDateFormat(initialDateId);
+      setFinalDateFormat(finalDateId);
+      setCodEstacao(codEstacaoId);
+      setAtributoFinal(atributoId);
+      console.log('entrou')
+    }
+  },[]);
+
+  const {data, isFetching} = useQuery(
     ["dataPlot", initialDateFormat, finalDateFormat, codEstacao],
-    () =>
-      api
-        .get(
-          `estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
-        )
-        .then((r) => r.data),
+    () => {
+      console.log('inicio use query')
+      return fetch(
+        `https://apitempo.inmet.gov.br/estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
+      ).then((res) => res.json());
+    },
+      // api
+      //   .get(
+      //     `estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
+      //   )
+      //   .then((r) => r.data),
     {
       onError: (error) => {
         console.log("erro no fetch dos dados");
@@ -36,13 +52,17 @@ export const FilterProvider = ({ children }) => {
       },
       refetchOnWindowFocus: false,
       retry: false,
-      staleTime: 1000 * 5,
+      staleTime: 1000 * 60 * 5,
     }
   );
 
   // if(dataPlot) {
   //   console.log(dataPlot)
   // }
+
+  if(data) {
+    console.log(data)
+  }
 
   const provides = {
     estacao,
@@ -65,6 +85,7 @@ export const FilterProvider = ({ children }) => {
     setAtributoFinal,
     validador,
     setValidador,
+    isFetching
   };
 
   return (

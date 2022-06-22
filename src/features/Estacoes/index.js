@@ -5,6 +5,8 @@ import filterContext, { FilterProvider } from "./filterContext";
 import { useParams } from "react-router-dom";
 import FilterForm from "./FilterForm";
 import ChartLine from "./ChartLine";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 
 const Estacoes = () => {
   const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
@@ -28,6 +30,7 @@ export default () => (
   <Provider>
     <FilterProvider>
       <Estacoes />
+      <ReactQueryDevtools />
     </FilterProvider>
   </Provider>
 );

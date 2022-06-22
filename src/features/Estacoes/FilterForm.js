@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import context from "./context";
 import filterContext from "./filterContext";
+import { useParams, useHistory } from "react-router-dom";
 
 import {
   Select,
@@ -223,6 +224,8 @@ const SelectAtributo = () => {
 };
 
 const ButtonFilter = () => {
+  let navigate = useHistory();
+
   const {
     estacao,
     initialDate,
@@ -252,7 +255,6 @@ const ButtonFilter = () => {
     const day1 = newDate(initialDate)
     const day2 = newDate(finalDate)
 
-    console.log(day2 - day1)
     setValidador((day2 - day1) > 0)
   }
 
@@ -264,7 +266,8 @@ const ButtonFilter = () => {
     const initialDateFormat = dateFormat(initialDate);
     const finalDateFormat = dateFormat(finalDate);
     const codEstacao = estacao.slice(0, 4);
-
+    
+    navigate.push(`/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`)
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);
