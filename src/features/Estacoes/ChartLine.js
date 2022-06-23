@@ -3,8 +3,14 @@ import Plot from "react-plotly.js";
 import filterContext from "./filterContext";
 
 const ChartLine = () => {
-  const { dataEstacao, atributoFinal, validador, codEstacao, estacao, atributo } =
-    useContext(filterContext);
+  const {
+    dataEstacao,
+    atributoFinal,
+    validador,
+    codEstacao,
+    estacao,
+    atributo,
+  } = useContext(filterContext);
   if (validador && dataEstacao && codEstacao) {
     const newData = [
       {
@@ -18,6 +24,7 @@ const ChartLine = () => {
         <Plot
           data={newData}
           layout={{
+            autosize: true,
             title: `${dataEstacao[0].CD_ESTACAO} - ${dataEstacao[0].DC_NOME}`,
             font: { size: 13 },
             transition: {
@@ -25,12 +32,13 @@ const ChartLine = () => {
               easing: "cubic-in-out",
             },
             yaxis: {
-              title:atributoFinal,
+              title: atributoFinal,
               autorange: true,
             },
           }}
-          config={{responsive: true}}
-          style={{width: '50%', marginBottom:'200vh'}}
+          config={{ responsive: true }}
+          useResizeHandler={true}
+          style={{ width: "50%" }}
         />
       </>
     );

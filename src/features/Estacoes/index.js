@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import FilterForm from "./FilterForm";
 import ChartLine from "./ChartLine";
 import { ReactQueryDevtools } from "react-query/devtools";
-
+import PlotMapbox from "./PlotMapbox";
 
 const Estacoes = () => {
   const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
@@ -20,7 +20,10 @@ const Estacoes = () => {
 
   return (
     <Layout filters={<FilterForm />}>
-      <ChartLine />
+      <div style={{display: 'flex'}}>
+        <ChartLine />
+        <PlotMapbox />
+      </div>
     </Layout>
   );
 };
