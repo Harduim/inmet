@@ -2,8 +2,10 @@ import React, { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import api from "../../services/api";
 import { useLocation, useParams } from "react-router-dom";
+import placeholderData from "./placeholderData";
 
 const filterContext = createContext(true);
+const arrPlaceHolder = [placeholderData];
 
 export const FilterProvider = ({ children }) => {
   const [estacao, setEstacao] = useState("A301 - RECIFE");
@@ -47,12 +49,18 @@ export const FilterProvider = ({ children }) => {
       refetchOnWindowFocus: false,
       retry: false,
       staleTime: 1000 * 60 * 5,
+      placeholderData: arrPlaceHolder.at(-1)
     }
   );
 
   // if(data) {
   //   console.log(data)
   // }
+  useEffect(() => {
+    if (data) {
+      arrPlaceHolder.push(data);
+    }
+  });
 
   useEffect(() => {
     setDataEstacao(data)

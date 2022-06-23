@@ -9,6 +9,8 @@ import {
   SelectVariant,
   DatePicker,
   Button,
+  Split,
+  SplitItem
 } from "@patternfly/react-core";
 
 const SelectEstacao = () => {
@@ -69,7 +71,6 @@ const SelectEstacao = () => {
       isOpen={isOpen}
       placeholderText={estacao}
       maxHeight={200}
-      width={400}
     >
       {listEstacoes}
     </Select>
@@ -216,7 +217,6 @@ const SelectAtributo = () => {
       isOpen={isOpen}
       placeholderText={atributo}
       maxHeight={200}
-      width={200}
     >
       {listAtributos}
     </Select>
@@ -280,13 +280,13 @@ const ButtonFilter = () => {
 
 const FilterForm = () => {
   return (
-    <>
-      <SelectEstacao />
-      <SelectAtributo />
-      <DatePickerMinMax id="initial" />
-      <DatePickerMinMax id="final" />
-      <ButtonFilter></ButtonFilter>
-    </>
+    <Split isWrappable hasGutter style={{padding: '10px'}}>
+      <SplitItem isFilled>{<SelectEstacao />}</SplitItem>
+      <SplitItem>{<SelectAtributo />}</SplitItem>
+      <SplitItem>{<DatePickerMinMax id="initial" />}</SplitItem>
+      <SplitItem>{<DatePickerMinMax id="final" />}</SplitItem>
+      <SplitItem>{<ButtonFilter />}</SplitItem>
+    </Split>
   );
 };
 export default FilterForm;

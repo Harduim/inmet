@@ -30,7 +30,7 @@ const ChartLine = () => {
             },
           }}
           config={{responsive: true}}
-          style={{width: '50%'}}
+          style={{width: '50%', marginBottom:'200vh'}}
         />
       </>
     );

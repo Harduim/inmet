@@ -19,8 +19,7 @@ const Estacoes = () => {
   }
 
   return (
-    <Layout>
-      <FilterForm />
+    <Layout filters={<FilterForm />}>
       <ChartLine />
     </Layout>
   );
