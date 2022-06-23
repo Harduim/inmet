@@ -258,10 +258,6 @@ const ButtonFilter = () => {
     setValidador((day2 - day1) > 0)
   }
 
-  // const validar = () => {
-  //   if(estacao && atributo && )
-  // }
-
   const handleClick = () => {
     const initialDateFormat = dateFormat(initialDate);
     const finalDateFormat = dateFormat(finalDate);

@@ -25,23 +25,17 @@ export const FilterProvider = ({ children }) => {
       setFinalDateFormat(finalDateId);
       setCodEstacao(codEstacaoId);
       setAtributoFinal(atributoId);
-      console.log('entrou')
     }
   },[]);
 
   const {data, isFetching} = useQuery(
     ["dataPlot", initialDateFormat, finalDateFormat, codEstacao],
-    () => {
-      console.log('inicio use query')
-      return fetch(
-        `https://apitempo.inmet.gov.br/estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
-      ).then((res) => res.json());
-    },
-      // api
-      //   .get(
-      //     `estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
-      //   )
-      //   .then((r) => r.data),
+    () =>
+      api
+        .get(
+          `estacao/diaria/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
+        )
+        .then((r) => r.data),
     {
       onError: (error) => {
         console.log("erro no fetch dos dados");
@@ -56,13 +50,13 @@ export const FilterProvider = ({ children }) => {
     }
   );
 
-  // if(dataPlot) {
-  //   console.log(dataPlot)
+  // if(data) {
+  //   console.log(data)
   // }
 
-  if(data) {
-    console.log(data)
-  }
+  useEffect(() => {
+    setDataEstacao(data)
+  }, [finalDateFormat, initialDateFormat, codEstacao])
 
   const provides = {
     estacao,
