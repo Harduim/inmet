@@ -37,8 +37,8 @@ const ChartLine = () => {
             },
           }}
           config={{ responsive: true }}
+          style={{ width: "100%" }}
           useResizeHandler={true}
-          style={{ width: "50%" }}
         />
       </>
     );

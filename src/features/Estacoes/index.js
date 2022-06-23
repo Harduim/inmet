@@ -7,6 +7,7 @@ import FilterForm from "./FilterForm";
 import ChartLine from "./ChartLine";
 import { ReactQueryDevtools } from "react-query/devtools";
 import PlotMapbox from "./PlotMapbox";
+import { Grid, GridItem } from "@patternfly/react-core";
 
 const Estacoes = () => {
   const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
@@ -20,10 +21,10 @@ const Estacoes = () => {
 
   return (
     <Layout filters={<FilterForm />}>
-      <div style={{display: 'flex'}}>
-        <ChartLine />
-        <PlotMapbox />
-      </div>
+      <Grid>
+        <GridItem lg={6}>{<ChartLine />}</GridItem>
+        <GridItem lg={6}>{<PlotMapbox />}</GridItem>
+      </Grid>
     </Layout>
   );
 };
