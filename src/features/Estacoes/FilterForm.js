@@ -10,7 +10,7 @@ import {
   DatePicker,
   Button,
   Split,
-  SplitItem
+  SplitItem,
 } from "@patternfly/react-core";
 
 const SelectEstacao = () => {
@@ -62,14 +62,14 @@ const SelectEstacao = () => {
   return (
     <Select
       variant={SelectVariant.typeahead}
-      //typeAheadAriaLabel="Select a state"
+      typeAheadAriaLabel="Seleciona a estação"
       onToggle={onToggle}
       onSelect={onSelect}
       onClear={clearSelection}
       onFilter={customFilter}
       selections={selected}
       isOpen={isOpen}
-      placeholderText={estacao}
+      placeholderText="Selecione a estação"
       maxHeight={200}
     >
       {listEstacoes}
@@ -141,7 +141,7 @@ const SelectAtributo = () => {
       datakey="CHUVA"
       key="CHUVA"
       value="Precipitação Total"
-      unidade="mm"
+      unidade="mm "
     />,
     <SelectOption
       datakey="TEMP_MAX"
@@ -215,7 +215,7 @@ const SelectAtributo = () => {
       onFilter={customFilter}
       selections={selected}
       isOpen={isOpen}
-      placeholderText={atributo}
+      placeholderText={"Selecione o atributo"}
       maxHeight={200}
     >
       {listAtributos}
@@ -240,6 +240,7 @@ const ButtonFilter = () => {
     setAtributoFinal,
     validador,
     setValidador,
+    setTitle,
   } = useContext(filterContext);
 
   const dateFormat = (date) => {
@@ -247,28 +248,31 @@ const ButtonFilter = () => {
   };
 
   const newDate = (date) => {
-    const arrDate = date.split('-')
+    const arrDate = date.split("-");
 
-    return new Date ([arrDate[1],arrDate[0],arrDate[2]].join('-'))
-  }
+    return new Date([arrDate[1], arrDate[0], arrDate[2]].join("-"));
+  };
   const validarDatas = () => {
-    const day1 = newDate(initialDate)
-    const day2 = newDate(finalDate)
+    const day1 = newDate(initialDate);
+    const day2 = newDate(finalDate);
 
-    setValidador((day2 - day1) > 0)
-  }
+    setValidador(day2 - day1 > 0);
+  };
 
   const handleClick = () => {
     const initialDateFormat = dateFormat(initialDate);
     const finalDateFormat = dateFormat(finalDate);
     const codEstacao = estacao.slice(0, 4);
-    
-    navigate.push(`/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`)
+
+    navigate.push(
+      `/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
+    );
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);
     setAtributoFinal(atributo);
-    validarDatas()
+    setTitle(estacao);
+    validarDatas();
   };
 
   return (
@@ -280,7 +284,7 @@ const ButtonFilter = () => {
 
 const FilterForm = () => {
   return (
-    <Split isWrappable hasGutter style={{padding: '10px'}}>
+    <Split isWrappable hasGutter style={{ padding: "10px" }}>
       <SplitItem isFilled>{<SelectEstacao />}</SplitItem>
       <SplitItem>{<SelectAtributo />}</SplitItem>
       <SplitItem>{<DatePickerMinMax id="initial" />}</SplitItem>

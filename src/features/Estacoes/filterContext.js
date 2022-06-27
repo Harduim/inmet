@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import api from "../../services/api";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import placeholderData from "./placeholderData";
 
 const filterContext = createContext(true);
@@ -12,14 +12,15 @@ export const FilterProvider = ({ children }) => {
   const [initialDate, setInitialDate] = useState("01-10-2019");
   const [finalDate, setFinalDate] = useState("31-10-2019");
   const [atributo, setAtributo] = useState("CHUVA");
-  const [dataEstacao, setDataEstacao] = useState(null);
   const [initialDateFormat, setInitialDateFormat] = useState("2019-10-01");
   const [finalDateFormat, setFinalDateFormat] = useState("2019-10-31");
   const [codEstacao, setCodEstacao] = useState("A301");
   const [atributoFinal, setAtributoFinal] = useState("CHUVA");
-
+  const [title, setTitle] = useState("A301 - RECIFE");
   const [validador, setValidador] = useState(true);
   const { atributoId, initialDateId, finalDateId, codEstacaoId } = useParams();
+
+  console.log('estacao',title)
 
   useEffect(() => {
     if (atributoId && initialDateId && finalDateId && codEstacaoId) {
@@ -28,9 +29,9 @@ export const FilterProvider = ({ children }) => {
       setCodEstacao(codEstacaoId);
       setAtributoFinal(atributoId);
     }
-  },[]);
+  }, []);
 
-  const {data, isFetching} = useQuery(
+  const { data: dataEstacao, isFetching } = useQuery(
     ["dataPlot", initialDateFormat, finalDateFormat, codEstacao],
     () =>
       api
@@ -42,29 +43,21 @@ export const FilterProvider = ({ children }) => {
       onError: (error) => {
         console.log("erro no fetch dos dados");
       },
-      onSuccess: (data) => {
-        setDataEstacao(data);
+      onSuccess: () => {
         console.log("fetch sucess");
       },
       refetchOnWindowFocus: false,
       retry: false,
       staleTime: 1000 * 60 * 5,
-      placeholderData: arrPlaceHolder.at(-1)
+      placeholderData: arrPlaceHolder.at(-1),
     }
   );
 
-  // if(data) {
-  //   console.log(data)
-  // }
   useEffect(() => {
-    if (data) {
-      arrPlaceHolder.push(data);
+    if (dataEstacao) {
+      arrPlaceHolder.push(dataEstacao);
     }
   });
-
-  useEffect(() => {
-    setDataEstacao(data)
-  }, [finalDateFormat, initialDateFormat, codEstacao])
 
   const provides = {
     estacao,
@@ -74,7 +67,6 @@ export const FilterProvider = ({ children }) => {
     finalDate,
     setFinalDate,
     dataEstacao,
-    setDataEstacao,
     initialDateFormat,
     setInitialDateFormat,
     finalDateFormat,
@@ -87,7 +79,9 @@ export const FilterProvider = ({ children }) => {
     setAtributoFinal,
     validador,
     setValidador,
-    isFetching
+    isFetching,
+    title,
+    setTitle,
   };
 
   return (
