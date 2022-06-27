@@ -1,8 +1,7 @@
 import Layout from "../shared/Layout";
 import { useContext } from "react";
 import context, { Provider } from "./context";
-import filterContext, { FilterProvider } from "./filterContext";
-import { useParams } from "react-router-dom";
+import { FilterProvider } from "./filterContext";
 import FilterForm from "./FilterForm";
 import ChartLine from "./ChartLine";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -10,10 +9,7 @@ import PlotMapbox from "./PlotMapbox";
 import { Grid, GridItem } from "@patternfly/react-core";
 
 const Estacoes = () => {
-  const { estacaoId, estacao, estacoesIsLoading, getEstacaoById } =
-    useContext(context);
-
-  const { cdEstacao } = useParams();
+  const { estacoesIsLoading } = useContext(context);
 
   if (estacoesIsLoading) {
     return <Layout>Teste 2</Layout>;
@@ -29,7 +25,7 @@ const Estacoes = () => {
   );
 };
 
-export default () => (
+const index = () => (
   <Provider>
     <FilterProvider>
       <Estacoes />
@@ -37,3 +33,5 @@ export default () => (
     </FilterProvider>
   </Provider>
 );
+
+export default index;

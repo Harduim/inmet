@@ -36,8 +36,8 @@ const SelectEstacao = () => {
     }
   }, [estacoes]);
 
-  const onToggle = (isOpen) => setOpen(isOpen);
-  const onSelect = (event, selection, isPlaceHolder) => {
+  const onToggle = (_isOpen) => setOpen(_isOpen);
+  const onSelect = (_event, selection, isPlaceHolder) => {
     if (isPlaceHolder) clearSelection();
     else {
       setSelected(selection);
@@ -77,7 +77,7 @@ const SelectEstacao = () => {
   );
 };
 
-const DatePickerMinMax = ({ value, id }) => {
+const DatePickerMinMax = ({ _value, id }) => {
   const { initialDate, setInitialDate, finalDate, setFinalDate } =
     useContext(filterContext);
   const minDate = new Date(2019, 9, 1);
@@ -181,7 +181,7 @@ const SelectAtributo = () => {
     />,
   ];
 
-  const onToggle = (isOpen) => setOpen(isOpen);
+  const onToggle = (_isOpen) => setOpen(_isOpen);
   const onSelect = (event, selection, isPlaceHolder) => {
     if (isPlaceHolder) clearSelection();
     else {
@@ -237,6 +237,7 @@ const ButtonFilter = () => {
     setAtributoFinal,
     setValidador,
     setTitle,
+    setNum,
   } = useContext(filterContext);
 
   const dateFormat = (date) => {
@@ -263,11 +264,12 @@ const ButtonFilter = () => {
     navigate.push(
       `/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
     );
+    setTitle(estacao);
+    setNum((num) => num+1);
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);
     setAtributoFinal(atributo);
-    setTitle(estacao);
     validarDatas();
   };
 
