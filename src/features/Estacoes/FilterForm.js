@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import context from "./context";
 import filterContext from "./filterContext";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import {
   Select,
@@ -14,7 +14,7 @@ import {
 } from "@patternfly/react-core";
 
 const SelectEstacao = () => {
-  const { estacao, setEstacao } = useContext(filterContext);
+  const { setEstacao } = useContext(filterContext);
   const { estacoes } = useContext(context);
   const [listEstacoes, setListEstacoes] = useState([]);
   const [isOpen, setOpen] = useState(null);
@@ -132,7 +132,7 @@ const DatePickerMinMax = ({ value, id }) => {
 };
 
 const SelectAtributo = () => {
-  const { atributo, setAtributo } = useContext(filterContext);
+  const { setAtributo } = useContext(filterContext);
   const [isOpen, setOpen] = useState(null);
   const [selected, setSelected] = useState(null);
 
@@ -230,15 +230,11 @@ const ButtonFilter = () => {
     estacao,
     initialDate,
     finalDate,
-    dataEstacao,
     atributo,
-    atributoFinal,
     setInitialDateFormat,
     setFinalDateFormat,
     setCodEstacao,
-    setAtributo,
     setAtributoFinal,
-    validador,
     setValidador,
     setTitle,
   } = useContext(filterContext);

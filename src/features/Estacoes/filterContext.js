@@ -20,8 +20,6 @@ export const FilterProvider = ({ children }) => {
   const [validador, setValidador] = useState(true);
   const { atributoId, initialDateId, finalDateId, codEstacaoId } = useParams();
 
-  console.log('estacao',title)
-
   useEffect(() => {
     if (atributoId && initialDateId && finalDateId && codEstacaoId) {
       setInitialDateFormat(initialDateId);
