@@ -33,14 +33,14 @@
     --pf-global--palette--cyan-600: #002822;
     --pf-global--palette--cyan-700: #001412;
 
-    --pf-global--palette--orange-50: #fff1eb;
-    --pf-global--palette--orange-100: #f69d79;
-    --pf-global--palette--orange-200: #f26831;
-    --pf-global--palette--orange-300: #ee4906;
-    --pf-global--palette--orange-400: #c23800;
-    --pf-global--palette--orange-500: #8f2900;
-    --pf-global--palette--orange-600: #7a2500;
-    --pf-global--palette--orange-700: #3d1300;
+    --pf-global--palette--orange-50: #EDFAED;
+    --pf-global--palette--orange-100: #A0D3A3;
+    --pf-global--palette--orange-200: #53AC59;
+    --pf-global--palette--orange-300: #3B8952;
+    --pf-global--palette--orange-400: #25794F;
+    --pf-global--palette--orange-500: #0F684B;
+    --pf-global--palette--orange-600: #03484C;
+    --pf-global--palette--orange-700: #1C232E;
 
     --pf-global--palette--red-50: #faebf1;
     --pf-global--palette--red-100: #be1357;
@@ -67,21 +67,20 @@
     --pf-global--primary-color--light-100: #9ef83e;
     --pf-global--primary-color--dark-100: #bffa80;
 
-    --pf-global--Color--100: #3d1300;
-    --pf-global--Color--200: #c23800;
-    --pf-global--Color--300: #7a2500;
-    --pf-global--Color--400: #ee4906;
+    --pf-global--Color--100: #1C232E;
+    --pf-global--Color--200: #25794F;
+    --pf-global--Color--300: #03484C;
+    --pf-global--Color--400: #3B8952;
     --pf-global--Color--light-100: #fff;
     --pf-global--Color--light-200: #f3ecec;
     --pf-global--Color--light-300: #dac8d1;
-    --pf-global--Color--dark-100: #3d1300;
-    --pf-global--Color--dark-200: #c23800;
+    --pf-global--Color--dark-100: #1C232E;
+    --pf-global--Color--dark-200: #25794F;
 
-    --pf-global--BackgroundColor--dark-100: #3d1300;
-    --pf-global--BackgroundColor--dark-200: #c23800;
-    --pf-global--BackgroundColor--dark-300: #7a2500;
-    --pf-global--BackgroundColor--dark-400: #ee4906;
+    --pf-global--BackgroundColor--dark-100: #1C232E;
+    --pf-global--BackgroundColor--dark-200: #25794F;
+    --pf-global--BackgroundColor--dark-300: #03484C;
+    --pf-global--BackgroundColor--dark-400: #3B8952;
     --pf-global--BackgroundColor--dark-transparent-100: rgba(61, 19, 0, 0.62); 
     --pf-global--BackgroundColor--dark-transparent-200: rgba(61, 19, 0, 0.62);
-
 }

@@ -1,11 +1,18 @@
-import Layout from '../shared/Layout'
+import Layout from "../shared/Layout";
 
 const Home = () => {
+  const Component = ({children}) => {
+    return <div>{children}</div>;
+  };
+
   return (
     <Layout>
-      <div>Home</div>
+      <Component style={{margin: '30px'}}>
+        <div>Home</div>
+        <div>Text</div>
+      </Component>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
