@@ -1,54 +1,46 @@
 import React, { useContext } from "react";
 import Plot from "react-plotly.js";
-import filterContext from "./filterContext";
+import context from "./context";
 
 const ChartLine = () => {
-  const {
-    dataEstacao,
-    atributoFinal,
-    validador,
-    codEstacao,
-    num,
-    title,
-  } = useContext(filterContext);
+  const { dataEstacao, atributoFinal, validador, codEstacao, num, title } =
+    useContext(context);
 
-  if (validador && dataEstacao && codEstacao && title) {
-    const newData = [
-      {
-        x: dataEstacao.map((atual) => atual.DT_MEDICAO),
-        y: dataEstacao.map((atual) => atual[atributoFinal]),
-      },
-    ];
+  if (!validador || !dataEstacao || !codEstacao || !title) return null;
 
-    return (
-      <>
-        <Plot
-          key={num}
-          data={newData}
-          layout={{
-            autosize: true,
-            title: {
-              text: title,
-            },
-            font: { size: 13 },
-            transition: {
-              duration: 500,
-              easing: "cubic-in-out",
-            },
-            yaxis: {
-              title: atributoFinal,
-              autorange: true,
-            },
-          }}
-          config={{ responsive: true }}
-          style={{ width: "100%" }}
-          useResizeHandler={true}
-        />
-      </>
-    );
-  }
+  const newData = [
+    {
+      x: dataEstacao.map((atual) => atual.DT_MEDICAO),
+      y: dataEstacao.map((atual) => atual[atributoFinal]),
+    },
+  ];
 
-  return null;
+  return (
+    <>
+      <Plot
+        key={num}
+        data={newData}
+        layout={{
+          autosize: true,
+          title: {
+            text: title,
+          },
+          font: { size: 13 },
+          transition: {
+            duration: 500,
+            easing: "cubic-in-out",
+          },
+          yaxis: {
+            title: atributoFinal,
+            autorange: true,
+          },
+        }}
+        config={{ responsive: true }}
+        style={{ width: "100%" }}
+        useResizeHandler={true}
+      />
+    </>
+  );
 };
 
 export default ChartLine;

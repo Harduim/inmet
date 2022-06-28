@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import context from "./context";
-import filterContext from "./filterContext";
 import { useHistory } from "react-router-dom";
+import dateFormat from "../shared/utils/dateFormat";
 
 import {
   Select,
@@ -14,8 +14,7 @@ import {
 } from "@patternfly/react-core";
 
 const SelectEstacao = () => {
-  const { setEstacao } = useContext(filterContext);
-  const { estacoes } = useContext(context);
+  const { estacoes, setEstacao } = useContext(context);
   const [listEstacoes, setListEstacoes] = useState([]);
   const [isOpen, setOpen] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -62,7 +61,7 @@ const SelectEstacao = () => {
   return (
     <Select
       variant={SelectVariant.typeahead}
-      typeAheadAriaLabel="Seleciona a estação"
+      typeAheadAriaLabel="Selecione a estação"
       onToggle={onToggle}
       onSelect={onSelect}
       onClear={clearSelection}
@@ -79,17 +78,10 @@ const SelectEstacao = () => {
 
 const DatePickerMinMax = ({ _value, id }) => {
   const { initialDate, setInitialDate, finalDate, setFinalDate } =
-    useContext(filterContext);
+    useContext(context);
   const minDate = new Date(2019, 9, 1);
   const maxDate = new Date(2019, 9, 31);
-  const dateFormat = (date) =>
-    date
-      .toLocaleDateString("pt-BR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      })
-      .replace(/\//g, "-");
+
   const dateParse = (date) => {
     const split = date.split("-");
     if (split.length !== 3) {
@@ -132,7 +124,7 @@ const DatePickerMinMax = ({ _value, id }) => {
 };
 
 const SelectAtributo = () => {
-  const { setAtributo } = useContext(filterContext);
+  const { setAtributo } = useContext(context);
   const [isOpen, setOpen] = useState(null);
   const [selected, setSelected] = useState(null);
 
@@ -238,9 +230,9 @@ const ButtonFilter = () => {
     setValidador,
     setTitle,
     setNum,
-  } = useContext(filterContext);
+  } = useContext(context);
 
-  const dateFormat = (date) => {
+  const format = (date) => {
     return date.split("-").reverse().join("-");
   };
 
@@ -257,15 +249,15 @@ const ButtonFilter = () => {
   };
 
   const handleClick = () => {
-    const initialDateFormat = dateFormat(initialDate);
-    const finalDateFormat = dateFormat(finalDate);
+    const initialDateFormat = format(initialDate);
+    const finalDateFormat = format(finalDate);
     const codEstacao = estacao.slice(0, 4);
 
     navigate.push(
       `/estacoes/${atributo}/${initialDateFormat}/${finalDateFormat}/${codEstacao}`
     );
     setTitle(estacao);
-    setNum((num) => num+1);
+    setNum((num) => num+1); // setando uma nova key para cada componente Plot criado
     setInitialDateFormat(initialDateFormat);
     setFinalDateFormat(finalDateFormat);
     setCodEstacao(codEstacao);
@@ -282,7 +274,7 @@ const ButtonFilter = () => {
 
 const FilterForm = () => {
   return (
-    <Split isWrappable hasGutter style={{ padding: "10px" }}>
+    <Split isWrappable hasGutter className="pf-u-p-md">
       <SplitItem isFilled>{<SelectEstacao />}</SplitItem>
       <SplitItem>{<SelectAtributo />}</SplitItem>
       <SplitItem>{<DatePickerMinMax id="initial" />}</SplitItem>
